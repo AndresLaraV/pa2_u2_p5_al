@@ -14,6 +14,15 @@ import jakarta.persistence.Table;
 @Table(name = "estudiante")
 public class Estudiante {
 
+	@Override
+	public String toString() {
+		return "Estudiante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
+				+ ", fechaNacimiento=" + fechaNacimiento + ", getId()=" + getId() + ", getNombre()=" + getNombre()
+				+ ", getApellido()=" + getApellido() + ", getCedula()=" + getCedula() + ", getFechaNacimiento()="
+				+ getFechaNacimiento() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@SequenceGenerator(name = "generador", sequenceName = "seq_estudiante", allocationSize = 1)

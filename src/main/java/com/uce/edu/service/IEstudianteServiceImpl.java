@@ -1,6 +1,6 @@
-package com.uce.edu.repository;
+package com.uce.edu.service;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.uce.edu.repository.modelo.Estudiante;
 
@@ -8,21 +8,21 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
-@Repository
+@Service
 @Transactional
-public class IEstudianteRepositoryImpl implements IEstudianteRepository {
+public class IEstudianteServiceImpl implements IEstudianteService {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
-	public Estudiante seleccionar(Integer id) {
+	public Estudiante buscar(Integer id) {
 		// TODO Auto-generated method stub
 		return this.entityManager.find(Estudiante.class, id);
 	}
 
 	@Override
-	public void insertar(Estudiante estudiante) {
+	public void guardar(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		this.entityManager.persist(estudiante);
 	}
@@ -34,9 +34,9 @@ public class IEstudianteRepositoryImpl implements IEstudianteRepository {
 	}
 
 	@Override
-	public void eliminar(Integer id) {
+	public void borrar(Integer id) {
 		// TODO Auto-generated method stub
-		Estudiante estu = this.seleccionar(id);
+		Estudiante estu = this.buscar(id);
 		this.entityManager.remove(estu);
 	}
 
