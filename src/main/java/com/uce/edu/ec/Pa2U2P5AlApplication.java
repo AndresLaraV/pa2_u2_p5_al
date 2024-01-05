@@ -31,15 +31,19 @@ public class Pa2U2P5AlApplication implements CommandLineRunner {
 		// TODO Auto-generated method stub
 
 		Ciudadano ciudadano1 = new Ciudadano();
-		ciudadano1.setNombre("Andres");
-		ciudadano1.setApellido("Lara");
+		ciudadano1.setNombre("Sebastian");
+		ciudadano1.setApellido("Viana");
 		this.ciudadanoService.guardar(ciudadano1);
 
 		// Cargar el Ciudadano desde la base de datos antes de asignarlo al Empleado
 		Ciudadano ciudadanoGuardado = this.ciudadanoService.buscar(ciudadano1.getId());
+		
+		ciudadano1.setNombre("Patricio");
+		ciudadano1.setApellido("Amores");
+		this.ciudadanoService.actualizar(ciudadano1);
 
 		Empleado empleado1 = new Empleado();
-		empleado1.setSalario(new BigDecimal(500));
+		empleado1.setSalario(new BigDecimal(400));
 		empleado1.setFechaIngreso(LocalDate.now());
 		empleado1.setCiudadano(ciudadanoGuardado);
 
