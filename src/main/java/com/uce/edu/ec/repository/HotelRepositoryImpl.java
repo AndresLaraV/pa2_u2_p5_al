@@ -10,8 +10,8 @@ import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public class IHotelRepositoryImpl implements IHotelRepository {
-	
+public class HotelRepositoryImpl implements IHotelRepository {
+
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -26,5 +26,17 @@ public class IHotelRepositoryImpl implements IHotelRepository {
 		// TODO Auto-generated method stub
 		this.entityManager.persist(hotel);
 	}
-	
+
+	@Override
+	public void actualizar(Hotel hotel) {
+		// TODO Auto-generated method stub
+		this.entityManager.merge(hotel);
+	}
+
+	@Override
+	public void eliminar(Integer id) {
+		// TODO Auto-generated method stub
+		this.entityManager.remove(id);
+	}
+
 }

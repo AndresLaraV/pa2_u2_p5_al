@@ -13,7 +13,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "hotel")
+@Table (name= "hotel")
 public class Hotel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_hotel")
@@ -28,8 +28,6 @@ public class Hotel {
 	@Column(name = "hotel_direccion")
 	private String direccion;
 
-	//Siempre hay que preguntarse 
-	//Que tipo de relacion tiene el hotel con las habitacoines
 	@OneToMany(mappedBy= "hotel", cascade = CascadeType.ALL)
 	private List<Habitacion> habitaciones;
 
