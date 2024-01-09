@@ -1,16 +1,18 @@
 package com.uce.edu.ec;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.ec.repository.modelo.Autor;
+import com.uce.edu.ec.repository.modelo.Autor2;
+import com.uce.edu.ec.repository.modelo.AutorLibro;
 import com.uce.edu.ec.repository.modelo.Libro;
+import com.uce.edu.ec.repository.modelo.Libro2;
 import com.uce.edu.ec.service.ILibroService;
 
 @SpringBootApplication
@@ -27,49 +29,44 @@ public class Pa2U2P5AlApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		/*
-		 * Hotel hotel = new Hotel(); hotel.setDireccion("Av Colon");
-		 * hotel.setNombre("Hotel Colon"); //hotel.set
-		 * 
-		 * Habitacion h1 = new Habitacion(); h1.setClase("Economica");
-		 * h1.setNumero("A1"); h1.setHotel(hotel);
-		 * 
-		 * Habitacion h2 = new Habitacion(); h2.setClase("Presidencial");
-		 * h2.setNumero("A2"); h2.setHotel(hotel);
-		 * 
-		 * List <Habitacion> habitaciones = new ArrayList<>(); habitaciones.add(h1);
-		 * habitaciones.add(h2);
-		 * 
-		 * hotel.setHabitaciones(habitaciones);
-		 * 
-		 * this.hotelService.guardar(hotel);
-		 */
 
-		Libro libro = new Libro();
-		libro.setTitulo("JAVA");
+		Libro2 libro = new Libro2();
+		libro.setTitulo("JAVA2");
 		libro.setFechaPublicacion(LocalDateTime.now());
 
-		Autor autor1 = new Autor();
+		Autor2 autor1 = new Autor2();
 		autor1.setNacionalidad("Ecuatoriano");
 		autor1.setNombre("Daniel Tirira");
 
-		Autor autor2 = new Autor();
+		Autor2 autor2 = new Autor2();
 		autor2.setNacionalidad("Ecuatoriano");
 		autor2.setNombre("Alfredo Teran");
 
-		Set<Autor> autores = new HashSet<Autor>();
+		List <Autor2> autores = new ArrayList<Autor2>();
 		autores.add(autor1);
 		autores.add(autor2);
 
-		libro.setAutores(autores);
-
-		Set<Libro> libros = new HashSet<>();
-		libros.add(libro);
-
-		autor1.setLibros(libros);
-		autor2.setLibros(libros);
-
-		this.iLibroService.guardar(libro);
+		AutorLibro autorLibro1 = new AutorLibro();
+		autorLibro1.setLibro2(libro);
+		autorLibro1.setAutor2(autor1);
+		
+		AutorLibro autorLibro2 = new AutorLibro();
+		autorLibro2.setLibro2(libro);
+		autorLibro2.setAutor2(autor2);
+		
+		//Seteamos un libro con dos autores
+		// Hay que ponerlo en una lista xq el libro.set recibe una lista de AutoreLibros
+		
+		List<AutorLibro> lista = new ArrayList<>();
+		lista.add(autorLibro1);
+		lista.add(autorLibro2);
+		
+		libro.setAutoresLibros(lista);
+		
+		//this.iLibroService.guardar(libro);
+		
+		Libro libroFinal = this.iLibroService.buscarPorNombre("JAVA");
+		System.out.println(libroFinal);
 	}
 
 }
