@@ -1,16 +1,17 @@
 package com.uce.edu.ec;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.ec.repository.modelo.Libro;
-import com.uce.edu.ec.service.IAutorService;
-import com.uce.edu.ec.service.ILibroService;
+import com.uce.edu.ec.repository.modelo.Ciudadano;
+import com.uce.edu.ec.repository.modelo.Empleado;
+import com.uce.edu.ec.service.ICiudadanoService;
+import com.uce.edu.ec.service.IEmpleadoService;
 
 @SpringBootApplication
 public class Pa2U2P5AlApplication implements CommandLineRunner {
@@ -22,7 +23,10 @@ public class Pa2U2P5AlApplication implements CommandLineRunner {
 	// 3. Criteria API Query
 
 	@Autowired
-	ILibroService iLibroService;
+	ICiudadanoService iCiudadanoService;
+	
+	@Autowired
+	IEmpleadoService iEmpleadoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P5AlApplication.class, args);
@@ -31,24 +35,23 @@ public class Pa2U2P5AlApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("TypedQuery");
-		List<Libro> lista = this.iLibroService.buscarPorFecha(LocalDateTime.of(2023, 12, 1, 0, 0));
-		for (Libro libro : lista) {
-			System.out.println(libro);
-		}
-
-		Libro li1 = this.iLibroService.buscarPorTitulo("JAVA");
-		System.out.println(li1);
-
-		System.out.println("NamedQuery");
-		Libro lib2 = this.iLibroService.buscarPorTituloNamed("JAVA");
-		System.out.println(lib2);
-
-		List<Libro> lista3 = this.iLibroService.buscarPorFechaPubliNamed(LocalDateTime.of(2023, 1, 1, 7, 15));
-		for (Libro libro : lista3) {
-			System.out.println(libro);
-		}
-
+		Ciudadano ciud2 = new Ciudadano ();
+		ciud2.setNombre("Andres");
+		ciud2.setApellido("Lara");
+		ciud2.setCedula("1722121835");
+		//this.iCiudadanoService.guardar(ciud2);
+		
+		Empleado emple = new Empleado ();
+		emple.setSalario(new BigDecimal(50));
+		emple.setFechaIngreso(LocalDate.now());
+		//emple.setCiudadano(ciud2);
+		//this.iEmpleadoService.guardar(emple);
+		
+		//Empleado emple1 = this.iCiudadanoService.buscarPorCedula("1722121835");
+		//System.out.println(emple1);
+		
+		Empleado emple1 = this.iCiudadanoService.buscarPorCedula("1722121835");
+		System.out.println(emple1);
 	}
 
 }

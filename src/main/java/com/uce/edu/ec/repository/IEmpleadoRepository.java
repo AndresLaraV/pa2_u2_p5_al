@@ -10,4 +10,9 @@ public interface IEmpleadoRepository {
 	public void actualizar(Empleado empleado);
 
 	public void eliminar(Integer id);
+	
+	
+	//public Empleado seleccionarCPorCedula(String cedula);
+		
+	
 }
