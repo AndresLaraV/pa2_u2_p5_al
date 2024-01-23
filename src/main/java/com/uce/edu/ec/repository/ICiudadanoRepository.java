@@ -12,16 +12,15 @@ public interface ICiudadanoRepository {
 
 	public void eliminar(Integer id);
 
-	// Native
-	public Ciudadano seleccionarPorCedulaCiud(String cedula);
+	// Criteria API Query
 
-	public Ciudadano seleccionarPorNombreCiud(String nombre);
+	public Ciudadano seleccionarPorApellido(String apellido);
 
-	public Ciudadano seleccionarPorApellidoCiud(String apellido);
+	// Funcionalidad que cuando el user sea de pichincha lo busque por nombre
+	// cuando sea de cotopaxi lo busque por apellido
+	// cuando no sea ni de cotopaxi ni de pichincha lo busque por cedula
+	public Ciudadano seleccionarPorCriteria(String nombre, String apellido, String cedula);
 
-	public Ciudadano seleccionarPorCodigoDactilar(String codigoDactilar);
-
-	public Ciudadano seleccionarPorCiudadOrigenCiud(String ciudadOrigen);
-
+	public Ciudadano seleccionarPorCriteriaAndOr(String nombre, String apellido, String cedula);
 
 }

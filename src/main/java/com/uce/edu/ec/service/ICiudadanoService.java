@@ -11,17 +11,12 @@ public interface ICiudadanoService {
 
 	public void borrar(Integer id);
 
-	// Native
-	
-	public Ciudadano buscarPorCedulaCiud(String cedula);
-	
-	public Ciudadano buscarPorNombreCiud(String nombre);
+	// Criteria Query
 
-	public Ciudadano buscarPorApellidoCiud(String apellido);
+	public Ciudadano buscarPorApellido(String apellido);
 
-	public Ciudadano buscarPorCodigoDactilar(String codigoDactilar);
+	public Ciudadano buscarPorCriteria(String nombre, String apellido, String cedula);
 
-	public Ciudadano buscarPorCiudadOrigenCiud(String ciudadOrigen);
-
+	public Ciudadano buscarPorCriteriaAndOr(String nombre, String apellido, String cedula);
 
 }
