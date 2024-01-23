@@ -25,6 +25,10 @@ public class Ciudadano {
 	private String apellido;
 	@Column(name = "ciud_cedula")
 	private String cedula;
+	@Column(name = "ciud_ciudadOrigen")
+	private String ciudadOrigen;
+	@Column(name = "ciud_codigo_dactilar")
+	private String codigoDactilar;
 
 	@OneToOne(mappedBy = "ciudadano")
 	private Empleado empleado;
@@ -69,4 +73,19 @@ public class Ciudadano {
 		this.empleado = empleado;
 	}
 
+	public String getCiudadOrigen() {
+		return ciudadOrigen;
+	}
+
+	public void setCiudadOrigen(String ciudadOrigen) {
+		this.ciudadOrigen = ciudadOrigen;
+	}
+
+	public String getCodigoDactilar() {
+		return codigoDactilar;
+	}
+
+	public void setCodigoDactilar(String codigoDactilar) {
+		this.codigoDactilar = codigoDactilar;
+	}
 }

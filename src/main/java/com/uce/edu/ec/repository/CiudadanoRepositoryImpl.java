@@ -3,12 +3,15 @@ package com.uce.edu.ec.repository;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.ec.repository.modelo.Ciudadano;
-import com.uce.edu.ec.repository.modelo.Empleado;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -43,15 +46,7 @@ public class CiudadanoRepositoryImpl implements ICiudadanoRepository {
 		this.entityManager.remove(ciud);
 	}
 
-	@Override
-	public Empleado seleccionarPorCedula(String cedula) {
-		// TODO Auto-generated method stub
-		TypedQuery<Empleado> myQuery = this.entityManager
-				.createQuery("SELECT e FROM Empleado e WHERE e.ciudadano.cedula = :cedula", Empleado.class);
-		myQuery.setParameter("cedula", cedula);
-		return null;
-	}
-
+//NATIVE QUERY
 	@Override
 	public Ciudadano seleccionarPorCedulaCiud(String cedula) {
 		// TODO Auto-generated method stub
@@ -60,5 +55,44 @@ public class CiudadanoRepositoryImpl implements ICiudadanoRepository {
 		myQuery.setParameter("cedula", cedula);
 		return (Ciudadano) myQuery.getSingleResult();
 	}
+
+	@Override
+	public Ciudadano seleccionarPorNombreCiud(String nombre) {
+		// TODO Auto-generated method stub
+		Query myQuery4 = this.entityManager.createNativeQuery("SELECT * FROM ciudadano c WHERE c.ciud_nombre = :nombre",
+				Ciudadano.class);
+		myQuery4.setParameter("nombre", nombre);
+		return (Ciudadano) myQuery4.getSingleResult();
+	}
+
+	@Override
+	public Ciudadano seleccionarPorApellidoCiud(String apellido) {
+		// TODO Auto-generated method stub
+		Query myQuery1 = this.entityManager
+				.createNativeQuery("SELECT * FROM ciudadano c WHERE c.ciud_apellido = :apellido", Ciudadano.class);
+		myQuery1.setParameter("apellido", apellido);
+		return (Ciudadano) myQuery1.getSingleResult();
+	}
+
+	@Override
+	public Ciudadano seleccionarPorCodigoDactilar(String codigoDactilar) {
+		// TODO Auto-generated method stub
+		Query myQuery2 = this.entityManager.createNativeQuery(
+				"SELECT * FROM ciudadano c WHERE c.ciud_codigo_dactilar = :codigoDactilar", Ciudadano.class);
+		myQuery2.setParameter("codigoDactilar", codigoDactilar);
+		return (Ciudadano) myQuery2.getSingleResult();
+	}
+
+	@Override
+	public Ciudadano seleccionarPorCiudadOrigenCiud(String ciudadOrigen) {
+		// TODO Auto-generated method stub
+		Query myQuery3 = this.entityManager.createNativeQuery(
+				"SELECT * FROM ciudadano c WHERE c.ciud_ciudad_origen = :ciudadOrigen", Ciudadano.class);
+		myQuery3.setParameter("ciudadOrigen", ciudadOrigen);
+		return (Ciudadano) myQuery3.getSingleResult();
+	}
+
+
+
 
 }

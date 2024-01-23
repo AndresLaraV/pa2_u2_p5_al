@@ -10,4 +10,15 @@ public interface IHotelService {
 	public void actualizar(Hotel hotel);
 
 	public void borrar(Integer id);
+	
+	//Typed 
+	public Hotel buscarPorNombre (String nombre);
+
+	public Hotel buscarPorDireccion(String direccion);
+
+	public Hotel buscarPorEstrellas (String estrellas);
+
+	public Hotel buscarPorTipo(String tipo);
+
+	public Hotel buscarPorCategoria (String categoria);
 }

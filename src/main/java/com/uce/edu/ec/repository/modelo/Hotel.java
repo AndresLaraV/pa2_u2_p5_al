@@ -13,7 +13,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table (name= "hotel")
+@Table(name = "hotel")
 public class Hotel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_hotel")
@@ -28,7 +28,16 @@ public class Hotel {
 	@Column(name = "hotel_direccion")
 	private String direccion;
 
-	@OneToMany(mappedBy= "hotel", cascade = CascadeType.ALL)
+	@Column(name = "hotel_estrellas")
+	private String estrellas;
+
+	@Column(name = "hotel_tipo")
+	private String tipo;
+
+	@Column(name = "hotel_categoria")
+	private String categoria;
+
+	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
 	private List<Habitacion> habitaciones;
 
 	// Set y Get
@@ -62,5 +71,29 @@ public class Hotel {
 
 	public void setHabitaciones(List<Habitacion> habitaciones) {
 		this.habitaciones = habitaciones;
+	}
+
+	public String getEstrellas() {
+		return estrellas;
+	}
+
+	public void setEstrellas(String estrellas) {
+		this.estrellas = estrellas;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 }
