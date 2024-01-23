@@ -34,36 +34,37 @@ public class HotelServiceImpl implements IHotelService {
 		// TODO Auto-generated method stub
 		this.hotelRepository.eliminar(id);
 	}
-	//Typed Query
+	//Criteria API Query
+
+	@Override
+	public Hotel buscarPorCriteriaNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return this.hotelRepository.seleccionarPorCriteriaNombre(nombre);
+	}
+
+	@Override
+	public Hotel buscarPorCriteriaDireccion(String direccion) {
+		// TODO Auto-generated method stub
+		return this.hotelRepository.seleccionarPorCriteriaDireccion(direccion);
+	}
+
+	@Override
+	public Hotel buscarPorCriteriaEstrellas(String estrellas) {
+		// TODO Auto-generated method stub
+		return this.hotelRepository.seleccionarPorCriteriaEstrellas(estrellas);
+	}
+
+	@Override
+	public Hotel buscarPorCriteriaTipo(String tipo) {
+		// TODO Auto-generated method stub
+		return this.hotelRepository.seleccionarPorCriteriaTipo(tipo);
+	}
+
+	@Override
+	public Hotel buscarPorCriteriaCategoria(String categoria) {
+		// TODO Auto-generated method stub
+		return this.hotelRepository.seleccionarPorCriteriaCategoria(categoria);
+	}
 	
-	@Override
-	public Hotel buscarPorNombre(String nombre) {
-		// TODO Auto-generated method stub
-		return this.hotelRepository.seleccionarPorNombre(nombre);
-	}
-
-	@Override
-	public Hotel buscarPorDireccion(String direccion) {
-		// TODO Auto-generated method stub
-		return this.hotelRepository.seleccionarPorDireccion(direccion);
-	}
-
-	@Override
-	public Hotel buscarPorEstrellas(String estrellas) {
-		// TODO Auto-generated method stub
-		return this.hotelRepository.seleccionarPorEstrellas(estrellas);
-	}
-
-	@Override
-	public Hotel buscarPorTipo(String tipo) {
-		// TODO Auto-generated method stub
-		return this.hotelRepository.seleccionarPorTipo(tipo);
-	}
-
-	@Override
-	public Hotel buscarPorCategoria(String categoria) {
-		// TODO Auto-generated method stub
-		return this.hotelRepository.seleccionarPorCategoria(categoria);
-	}
-
+	
 }

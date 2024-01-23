@@ -12,13 +12,13 @@ public interface IHotelService {
 	public void borrar(Integer id);
 	
 	//Typed 
-	public Hotel buscarPorNombre (String nombre);
+	public Hotel buscarPorCriteriaNombre (String nombre);
 
-	public Hotel buscarPorDireccion(String direccion);
+	public Hotel buscarPorCriteriaDireccion(String direccion);
 
-	public Hotel buscarPorEstrellas (String estrellas);
+	public Hotel buscarPorCriteriaEstrellas (String estrellas);
 
-	public Hotel buscarPorTipo(String tipo);
+	public Hotel buscarPorCriteriaTipo(String tipo);
 
-	public Hotel buscarPorCategoria (String categoria);
+	public Hotel buscarPorCriteriaCategoria (String categoria);
 }

@@ -11,14 +11,15 @@ public interface IHotelRepository {
 
 	public void eliminar(Integer id);
 	
-	// Typed
-	public Hotel seleccionarPorNombre(String nombre);
+	// Criteria API Query
+	
+	public Hotel seleccionarPorCriteriaNombre(String nombre);
 
-	public Hotel seleccionarPorDireccion(String direccion);
+	public Hotel seleccionarPorCriteriaDireccion(String direccion);
 
-	public Hotel seleccionarPorEstrellas(String estrellas);
+	public Hotel seleccionarPorCriteriaEstrellas(String estrellas);
 
-	public Hotel seleccionarPorTipo(String tipo);
+	public Hotel seleccionarPorCriteriaTipo(String tipo);
 
-	public Hotel seleccionarPorCategoria(String categoria);
+	public Hotel seleccionarPorCriteriaCategoria(String categoria);
 }

@@ -7,6 +7,10 @@ import com.uce.edu.ec.repository.modelo.Hotel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -40,50 +44,94 @@ public class HotelRepositoryImpl implements IHotelRepository {
 		this.entityManager.remove(id);
 	}
 
-	// Typed Query
+	// Criteria APi Query
 	@Override
-	public Hotel seleccionarPorNombre(String nombre) {
+	public Hotel seleccionarPorCriteriaNombre(String nombre) {
 		// TODO Auto-generated method stub
-		TypedQuery<Hotel> myQuery = this.entityManager.createQuery("select h from Hotel h Where h.nombre = :nombre",
-				Hotel.class);
-		myQuery.setParameter("nombre", nombre);
-		return myQuery.getSingleResult();
+		CriteriaBuilder myCriteriaBuilder = this.entityManager.getCriteriaBuilder();
+
+		CriteriaQuery<Hotel> myCriteriaQuery = myCriteriaBuilder.createQuery(Hotel.class);
+
+		Root<Hotel> myFrom = myCriteriaQuery.from(Hotel.class);
+
+		Predicate condicionNombre = myCriteriaBuilder.equal(myFrom.get("nombre"), nombre);
+
+		myCriteriaQuery.select(myFrom).where(condicionNombre);
+
+		TypedQuery<Hotel> myTypedQuery = this.entityManager.createQuery(myCriteriaQuery);
+
+		return myTypedQuery.getSingleResult();
 	}
 
 	@Override
-	public Hotel seleccionarPorDireccion(String direccion) {
+	public Hotel seleccionarPorCriteriaDireccion(String direccion) {
 		// TODO Auto-generated method stub
-		TypedQuery<Hotel> myQuery = this.entityManager
-				.createQuery("select h from Hotel h Where h.direccion = :direccion", Hotel.class);
-		myQuery.setParameter("direccion", direccion);
-		return myQuery.getSingleResult();
+		CriteriaBuilder myCriteriaBuilder = this.entityManager.getCriteriaBuilder();
+
+		CriteriaQuery<Hotel> myCriteriaQuery = myCriteriaBuilder.createQuery(Hotel.class);
+
+		Root<Hotel> myFrom = myCriteriaQuery.from(Hotel.class);
+
+		Predicate condicionDireccion = myCriteriaBuilder.equal(myFrom.get("direccion"), direccion);
+
+		myCriteriaQuery.select(myFrom).where(condicionDireccion);
+
+		TypedQuery<Hotel> myTypedQuery = this.entityManager.createQuery(myCriteriaQuery);
+
+		return myTypedQuery.getSingleResult();
 	}
 
 	@Override
-	public Hotel seleccionarPorEstrellas(String estrellas) {
+	public Hotel seleccionarPorCriteriaEstrellas(String estrellas) {
 		// TODO Auto-generated method stub
-		TypedQuery<Hotel> myQuery = this.entityManager
-				.createQuery("select h from Hotel h Where h.estrellas = :estrellas", Hotel.class);
-		myQuery.setParameter("estrellas", estrellas);
-		return myQuery.getSingleResult();
+		CriteriaBuilder myCriteriaBuilder = this.entityManager.getCriteriaBuilder();
+
+		CriteriaQuery<Hotel> myCriteriaQuery = myCriteriaBuilder.createQuery(Hotel.class);
+
+		Root<Hotel> myFrom = myCriteriaQuery.from(Hotel.class);
+
+		Predicate condicionEstrellas = myCriteriaBuilder.equal(myFrom.get("estrellas"), estrellas);
+
+		myCriteriaQuery.select(myFrom).where(condicionEstrellas);
+
+		TypedQuery<Hotel> myTypedQuery = this.entityManager.createQuery(myCriteriaQuery);
+
+		return myTypedQuery.getSingleResult();
 	}
 
 	@Override
-	public Hotel seleccionarPorTipo(String tipo) {
+	public Hotel seleccionarPorCriteriaTipo(String tipo) {
 		// TODO Auto-generated method stub
-		TypedQuery<Hotel> myQuery = this.entityManager.createQuery("select h from Hotel h Where h.tipo = :tipo",
-				Hotel.class);
-		myQuery.setParameter("tipo", tipo);
-		return myQuery.getSingleResult();
+		CriteriaBuilder myCriteriaBuilder = this.entityManager.getCriteriaBuilder();
+
+		CriteriaQuery<Hotel> myCriteriaQuery = myCriteriaBuilder.createQuery(Hotel.class);
+
+		Root<Hotel> myFrom = myCriteriaQuery.from(Hotel.class);
+
+		Predicate condicionTipo = myCriteriaBuilder.equal(myFrom.get("tipo"), tipo);
+
+		myCriteriaQuery.select(myFrom).where(condicionTipo);
+
+		TypedQuery<Hotel> myTypedQuery = this.entityManager.createQuery(myCriteriaQuery);
+
+		return myTypedQuery.getSingleResult();
 	}
 
 	@Override
-	public Hotel seleccionarPorCategoria(String categoria) {
-		// TODO Auto-generated method stub
-		TypedQuery<Hotel> myQuery = this.entityManager
-				.createQuery("select h from Hotel h Where h.categoria = :categoria", Hotel.class);
-		myQuery.setParameter("categoria", categoria);
-		return myQuery.getSingleResult();
+	public Hotel seleccionarPorCriteriaCategoria(String categoria) {
+		CriteriaBuilder myCriteriaBuilder = this.entityManager.getCriteriaBuilder();
+
+		CriteriaQuery<Hotel> myCriteriaQuery = myCriteriaBuilder.createQuery(Hotel.class);
+
+		Root<Hotel> myFrom = myCriteriaQuery.from(Hotel.class);
+
+		Predicate condicionCategoria = myCriteriaBuilder.equal(myFrom.get("categoria"), categoria);
+
+		myCriteriaQuery.select(myFrom).where(condicionCategoria);
+
+		TypedQuery<Hotel> myTypedQuery = this.entityManager.createQuery(myCriteriaQuery);
+
+		return myTypedQuery.getSingleResult();
 	}
 
 }
