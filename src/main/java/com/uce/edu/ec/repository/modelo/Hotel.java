@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,7 +38,7 @@ public class Hotel {
 	@Column(name = "hotel_categoria")
 	private String categoria;
 
-	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Habitacion> habitaciones;
 
 	// Set y Get
@@ -96,4 +97,11 @@ public class Hotel {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
+
+	@Override
+	public String toString() {
+		return "Hotel [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", estrellas=" + estrellas
+				+ ", tipo=" + tipo + ", categoria=" + categoria + ", habitaciones=" + habitaciones + "]";
+	}
+
 }

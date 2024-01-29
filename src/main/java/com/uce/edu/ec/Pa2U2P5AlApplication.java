@@ -1,10 +1,13 @@
 package com.uce.edu.ec;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.edu.ec.repository.modelo.Habitacion;
 import com.uce.edu.ec.repository.modelo.Hotel;
 import com.uce.edu.ec.service.IHotelService;
 
@@ -20,37 +23,29 @@ public class Pa2U2P5AlApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-		// Hibernate: select
-		// h1_0.hotel_id,h1_0.hotel_categoria,h1_0.hotel_direccion,h1_0.hotel_estrellas,h1_0.hotel_nombre,h1_0.hotel_tipo
-		// from hotel h1_0 where h1_0.hotel_nombre=?
-		Hotel h1 = this.iHotelService.buscarPorCriteriaNombre("Hotel Golden");
-		System.out.println(h1);
-
-		// Hibernate: select
-		// h1_0.hotel_id,h1_0.hotel_categoria,h1_0.hotel_direccion,h1_0.hotel_estrellas,h1_0.hotel_nombre,h1_0.hotel_tipo
-		// from hotel h1_0 where h1_0.hotel_categoria=?
-		Hotel h2 = this.iHotelService.buscarPorCriteriaCategoria("Familiar");
-		System.out.println(h2);
-
-		// Hibernate: select
-		// h1_0.hotel_id,h1_0.hotel_categoria,h1_0.hotel_direccion,h1_0.hotel_estrellas,h1_0.hotel_nombre,h1_0.hotel_tipo
-		// from hotel h1_0 where h1_0.hotel_direccion=?
-		Hotel h3 = this.iHotelService.buscarPorCriteriaDireccion("Calderon");
-		System.out.println(h3);
-
-		// Hibernate: select
-		// h1_0.hotel_id,h1_0.hotel_categoria,h1_0.hotel_direccion,h1_0.hotel_estrellas,h1_0.hotel_nombre,h1_0.hotel_tipo
-		// from hotel h1_0 where h1_0.hotel_estrellas=?
-		Hotel h4 = this.iHotelService.buscarPorCriteriaEstrellas("4 Estrellas");
-		System.out.println(h4);
-
-		// Hibernate: select
-		// h1_0.hotel_id,h1_0.hotel_categoria,h1_0.hotel_direccion,h1_0.hotel_estrellas,h1_0.hotel_nombre,h1_0.hotel_tipo
-		// from hotel h1_0 where h1_0.hotel_tipo=?
-		Hotel h5 = this.iHotelService.buscarPorCriteriaTipo("Economico");
-		System.out.println(h5);
-
+		System.out.println("INNER JOIN");
+		List<Hotel> lista = this.iHotelService.buscarPorInnerJoin("Familiar");
+		for (Hotel h : lista) {
+			System.out.println(h);
+		}
+		System.out.println("RIGHT JOIN");
+		List<Hotel> lista2 = this.iHotelService.buscarPorRightJoin("Av Patria");
+		for (Hotel h : lista2) {
+			System.out.println(h);
+		}
+		System.out.println("LEFT JOIN");
+		List<Hotel> lista3 = this.iHotelService.buscarPorLeftJoin("4 Estrellas");
+		for (Hotel h : lista3) {
+			System.out.println(h);
+		}
+		System.out.println("FULL JOIN");
+		List<Hotel> lista4 = this.iHotelService.buscarPorFullJoin("5 Estrellas");
+		for (Hotel h : lista4) {
+			System.out.println(h);
+			for (Habitacion b : h.getHabitaciones()) {
+				System.out.println(b);
+			}
+		}
 	}
 
 }

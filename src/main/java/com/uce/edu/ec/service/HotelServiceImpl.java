@@ -1,5 +1,7 @@
 package com.uce.edu.ec.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +66,31 @@ public class HotelServiceImpl implements IHotelService {
 	public Hotel buscarPorCriteriaCategoria(String categoria) {
 		// TODO Auto-generated method stub
 		return this.hotelRepository.seleccionarPorCriteriaCategoria(categoria);
+	}
+	//JOIN TYPES
+	
+	@Override
+	public List<Hotel> buscarPorInnerJoin(String categoria) {
+		// TODO Auto-generated method stub
+		return this.hotelRepository.seleccionarPorInnerJoin(categoria);
+	}
+
+	@Override
+	public List<Hotel> buscarPorRightJoin(String direccion) {
+		// TODO Auto-generated method stub
+		return this.hotelRepository.seleccionarPorRightJoin(direccion);
+	}
+
+	@Override
+	public List<Hotel> buscarPorLeftJoin(String estrellas) {
+		// TODO Auto-generated method stub
+		return this.hotelRepository.seleccionarPorLeftJoin(estrellas);
+	}
+
+	@Override
+	public List<Hotel> buscarPorFullJoin(String estrellas) {
+		// TODO Auto-generated method stub
+		return this.hotelRepository.seleccionarPorFullJoin(estrellas);
 	}
 	
 	

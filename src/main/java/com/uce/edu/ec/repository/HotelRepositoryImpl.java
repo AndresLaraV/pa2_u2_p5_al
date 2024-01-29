@@ -1,5 +1,7 @@
 package com.uce.edu.ec.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.ec.repository.modelo.Hotel;
@@ -132,6 +134,63 @@ public class HotelRepositoryImpl implements IHotelRepository {
 		TypedQuery<Hotel> myTypedQuery = this.entityManager.createQuery(myCriteriaQuery);
 
 		return myTypedQuery.getSingleResult();
+	}
+
+	// JOIN TYPES
+	@Override
+	public List<Hotel> seleccionarPorInnerJoin(String categoria) {
+		// TODO Auto-generated method stub
+		TypedQuery<Hotel> myQuery = this.entityManager
+				.createQuery("SELECT h FROM Hotel h JOIN h.habitaciones b Where h.categoria = :categoria", Hotel.class);
+		myQuery.setParameter("categoria", categoria);
+
+		List<Hotel> lista = myQuery.getResultList();
+		for (Hotel h : lista) {
+			h.getHabitaciones().size();
+		}
+		return lista;
+	}
+
+	@Override
+	public List<Hotel> seleccionarPorRightJoin(String direccion) {
+		// TODO Auto-generated method stub
+		TypedQuery<Hotel> myQuery = this.entityManager.createQuery(
+				"SELECT h FROM Hotel h RIGHT JOIN h.habitaciones b  Where h.direccion = :direccion", Hotel.class);
+		myQuery.setParameter("direccion", direccion);
+
+		List<Hotel> lista = myQuery.getResultList();
+		for (Hotel h : lista) {
+			h.getHabitaciones().size();
+		}
+		return lista;
+	}
+
+	@Override
+	public List<Hotel> seleccionarPorLeftJoin(String estrellas) {
+		// TODO Auto-generated method stub
+		TypedQuery<Hotel> myQuery = this.entityManager.createQuery(
+				"SELECT h FROM Hotel h LEFT JOIN h.habitaciones b Where h.estrellas = :estrellas", Hotel.class);
+		myQuery.setParameter("estrellas", estrellas);
+
+		List<Hotel> lista = myQuery.getResultList();
+		for (Hotel h : lista) {
+			h.getHabitaciones().size();
+		}
+		return lista;
+	}
+
+	@Override
+	public List<Hotel> seleccionarPorFullJoin(String estrellas) {
+		// TODO Auto-generated method stub
+		TypedQuery<Hotel> myQuery = this.entityManager.createQuery(
+				"SELECT h FROM Hotel h FULL JOIN h.habitaciones b Where h.estrellas = :estrellas", Hotel.class);
+		myQuery.setParameter("estrellas", estrellas);
+
+		List<Hotel> lista = myQuery.getResultList();
+		for (Hotel h : lista) {
+			h.getHabitaciones().size();
+		}
+		return lista;
 	}
 
 }
