@@ -26,11 +26,13 @@ public interface IHotelService {
 	
 	//JOIN TYPES
 	
-	public List<Hotel> buscarPorInnerJoin(String categoria);
+	public List<Hotel> buscarPorInnerJoin();
 
-	public List<Hotel> buscarPorRightJoin(String direccion);
+	public List<Hotel> buscarPorRightJoin();
 
-	public List<Hotel> buscarPorLeftJoin(String estrellas);
+	public List<Hotel> buscarPorLeftJoin();
 
-	public List<Hotel> buscarPorFullJoin(String estrellas);
+	public List<Hotel> buscarPorFullJoin();
+	
+	public List<Hotel> buscarPorFetchJoin();
 }

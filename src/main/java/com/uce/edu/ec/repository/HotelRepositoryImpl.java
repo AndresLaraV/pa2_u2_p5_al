@@ -138,11 +138,22 @@ public class HotelRepositoryImpl implements IHotelRepository {
 
 	// JOIN TYPES
 	@Override
-	public List<Hotel> seleccionarPorInnerJoin(String categoria) {
+	public List<Hotel> seleccionarPorInnerJoin() {
 		// TODO Auto-generated method stub
 		TypedQuery<Hotel> myQuery = this.entityManager
-				.createQuery("SELECT h FROM Hotel h JOIN h.habitaciones b Where h.categoria = :categoria", Hotel.class);
-		myQuery.setParameter("categoria", categoria);
+				.createQuery("SELECT h FROM Hotel h JOIN h.habitaciones b", Hotel.class);
+		List<Hotel> lista = myQuery.getResultList();
+		for (Hotel h : lista) {
+			h.getHabitaciones().size();
+		}
+		return lista;
+	}
+
+	@Override
+	public List<Hotel> seleccionarPorRightJoin() {
+		// TODO Auto-generated method stub
+		TypedQuery<Hotel> myQuery = this.entityManager.createQuery(
+				"SELECT h FROM Hotel h RIGHT JOIN h.habitaciones b", Hotel.class);
 
 		List<Hotel> lista = myQuery.getResultList();
 		for (Hotel h : lista) {
@@ -152,11 +163,11 @@ public class HotelRepositoryImpl implements IHotelRepository {
 	}
 
 	@Override
-	public List<Hotel> seleccionarPorRightJoin(String direccion) {
+	public List<Hotel> seleccionarPorLeftJoin() {
 		// TODO Auto-generated method stub
 		TypedQuery<Hotel> myQuery = this.entityManager.createQuery(
-				"SELECT h FROM Hotel h RIGHT JOIN h.habitaciones b  Where h.direccion = :direccion", Hotel.class);
-		myQuery.setParameter("direccion", direccion);
+				"SELECT h FROM Hotel h LEFT JOIN h.habitaciones b", Hotel.class);
+		
 
 		List<Hotel> lista = myQuery.getResultList();
 		for (Hotel h : lista) {
@@ -166,11 +177,10 @@ public class HotelRepositoryImpl implements IHotelRepository {
 	}
 
 	@Override
-	public List<Hotel> seleccionarPorLeftJoin(String estrellas) {
+	public List<Hotel> seleccionarPorFullJoin() {
 		// TODO Auto-generated method stub
 		TypedQuery<Hotel> myQuery = this.entityManager.createQuery(
-				"SELECT h FROM Hotel h LEFT JOIN h.habitaciones b Where h.estrellas = :estrellas", Hotel.class);
-		myQuery.setParameter("estrellas", estrellas);
+				"SELECT h FROM Hotel h FULL JOIN h.habitaciones b", Hotel.class);
 
 		List<Hotel> lista = myQuery.getResultList();
 		for (Hotel h : lista) {
@@ -180,17 +190,11 @@ public class HotelRepositoryImpl implements IHotelRepository {
 	}
 
 	@Override
-	public List<Hotel> seleccionarPorFullJoin(String estrellas) {
+	public List<Hotel> seleccionarPorFetchJoin() {
 		// TODO Auto-generated method stub
-		TypedQuery<Hotel> myQuery = this.entityManager.createQuery(
-				"SELECT h FROM Hotel h FULL JOIN h.habitaciones b Where h.estrellas = :estrellas", Hotel.class);
-		myQuery.setParameter("estrellas", estrellas);
-
-		List<Hotel> lista = myQuery.getResultList();
-		for (Hotel h : lista) {
-			h.getHabitaciones().size();
-		}
-		return lista;
+		TypedQuery<Hotel> myQuery = this.entityManager
+				.createQuery("SELECT h FROM Hotel h JOIN FETCH h.habitaciones b", Hotel.class);
+		return myQuery.getResultList();
 	}
 
 }
